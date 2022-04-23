@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>SSTS</title>
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="./style.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <h1>Substructural typesystems vs Stack-Oriented languages</h1>
+
+  <h2>Building blocks</h2>
+  Definition of the fundamental operations that define the 2 framework that we
+  are analyzing.
+  <h3>Stack-Oriented languages primitives</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Primitive</th>
+        <th>Description</th>
+        <th>Signature (?)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Duplicate</td>
+        <td>Duplicate the element on the top of the stack.</td>
+        <td><pre>a -- a a</pre></td>
+      </tr>
+      <tr>
+        <td>Swap</td>
+        <td>Exchange the elements on the top of the stack.</td>
+        <td><pre>a b -- b a</pre></td>
+      </tr>
+      <tr>
+        <td>Drop</td>
+        <td>Drop the element on the top of the stack.</td>
+        <td><pre>a --</pre></td>
+      </tr>
+    </tbody>
+  </table>
+  Other operation that are usually provided like rot, over, ecc... can be
+  defined by using these 3 operations.
+
+  <h3>Structural Rules</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Rule</th>
+        <th>Description</th>
+        <th>Inference rule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Contraction (or Factoring)</td>
+        <td>Two equal (or unifiable) members on the same side of a sequent can
+          be replaced by a single member (or common instance).</td>
+        <td>\[
+          \begin{prooftree}
+            \AXC{$\Gamma, A, A \vdash \Sigma$}
+            \UIC{$\Gamma, A \vdash \Sigma$}
+          \end{prooftree}
+        \]\[
+          \begin{prooftree}
+            \AXC{$\Gamma \vdash A, A \Sigma$}
+            \UIC{$\Gamma \vdash A, \Sigma$}
+          \end{prooftree}
+        \]</td>
+      </tr>
+      <tr>
+        <td>Exchange</td>
+        <td>Two members on the same side of a sequent can be swapped.</td>
+        <td>\[
+          \begin{prooftree}
+            \AXC{$\Gamma_1, A, \Gamma_2, B, \Gamma_3 \vdash \Sigma$}
+            \UIC{$\Gamma_1, B, \Gamma_2, A, \Gamma_3 \vdash \Sigma$}
+          \end{prooftree}
+        \]\[
+          \begin{prooftree}
+            \AXC{$\Gamma \vdash \Sigma_1, A, \Sigma_2, B, \Sigma_3$}
+            \UIC{$\Gamma \vdash \Sigma_1, B, \Sigma_2, A, \Sigma_3$}
+          \end{prooftree}
+        \]</td>
+      </tr>
+      <tr>
+        <td>Weakening</td>
+        <td>Hypotheses or conclusion of a sequent may be extended with additional members.</td>
+        <td>\[
+          \begin{prooftree}
+            \AXC{$\Gamma \vdash \Sigma$}
+            \UIC{$\Gamma , A\vdash \Sigma$}
+          \end{prooftree}
+        \]\[
+          \begin{prooftree}
+            \AXC{$\Gamma \vdash \Sigma$}
+            \UIC{$\Gamma \vdash \Sigma, A$}
+          \end{prooftree}
+        \]</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>The relationship</h2>
+  It's pretty obvious that there is a 1 to 1 correspondence between the
+  stack-oriented primitives and the structural rules.
+  <table>
+    <thead>
+      <tr>
+        <th>Stack oriented primitive</th>
+        <th>Structural rule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Duplicate</td>
+        <td>Contraction</td>
+      </tr>
+      <tr>
+        <td>Spaw</td>
+        <td>Exchange</td>
+      </tr>
+      <tr>
+        <td>Drop</td>
+        <td>Weakening</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Substructural typesystems</h2>
+  Substructural typesystems are typesystem where zero, one or more structural
+  rules are absent.
+  <table>
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Exchange</th>
+      <th>Weakening</th>
+      <th>Contraction</th>
+      <th>Logic</th>
+      <th>Interpretation</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ordered</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>Noncommutative</td>
+        <td>Use exactly once and in order</td>
+      </tr>
+      <tr>
+        <td>Linear</td>
+        <td>✔️</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>Linear</td>
+        <td>Use exactly once</td>
+      </tr>
+      <tr>
+        <td>Affine</td>
+        <td>✔️</td>
+        <td>✔️</td>
+        <td>❌</td>
+        <td>Affine</td>
+        <td>Use at most once</td>
+      </tr>
+      <tr>
+        <td>Relevant</td>
+        <td>✔️</td>
+        <td>❌</td>
+        <td>✔️</td>
+        <td>Relevant</td>
+        <td>Use at least once</td>
+      </tr>
+      <tr>
+        <td>Normal</td>
+        <td>✔️</td>
+        <td>✔️</td>
+        <td>✔️</td>
+        <td>Standard</td>
+        <td>Use arbitrarly</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>What does this mean</h2>
+  Modelling substructural typesystems in a stack-based language is a trivial
+  task, just look at the (substructural) type on the top of the stack and
+  disable the corresponding primitives.
+  <table>
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Swap</th>
+      <th>Drop</th>
+      <th>Duplicate</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ordered</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Linear</td>
+        <td>✔️</td>
+        <td>❌</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Affine</td>
+        <td>✔️</td>
+        <td>✔️</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Relevant</td>
+        <td>✔️</td>
+        <td>❌</td>
+        <td>✔️</td>
+      </tr>
+      <tr>
+        <td>Normal</td>
+        <td>✔️</td>
+        <td>✔️</td>
+        <td>✔️</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Type inference</h2>
+  Also performing type inference should be trivial (TODO: check).
+</body>
+</html>

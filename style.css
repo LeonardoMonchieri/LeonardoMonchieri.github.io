@@ -75,7 +75,6 @@ input {
 }
 
 img {
-	max-width: 100%;
 	height: auto
 }
 
@@ -86,7 +85,7 @@ h4,
 h5,
 h6 {
 	line-height: 1.2;
-	margin: calc(1.5 * var(--universal-margin)) var(--universal-margin);
+	margin: calc(1.5 * var(--universal-margin)) calc(0.0 * var(--universal-margin));
 	font-weight: 500
 }
 
@@ -786,7 +785,6 @@ fieldset {
 legend {
 	box-sizing: border-box;
 	display: table;
-	max-width: 100%;
 	white-space: normal;
 	font-weight: 700;
 	padding: calc(var(--universal-padding) / 2)
@@ -1464,7 +1462,6 @@ table {
 table caption {
 	font-size: 1.5rem;
 	margin: calc(2 * var(--universal-margin)) 0;
-	max-width: 100%;
 	flex: 0 0 100%
 }
 
@@ -1511,12 +1508,10 @@ table td {
 
 table:not(.horizontal) {
 	overflow: auto;
-	max-height: 400px
 }
 
 table:not(.horizontal) thead,
 table:not(.horizontal) tbody {
-	max-width: 100%;
 	flex: 0 0 100%
 }
 
