@@ -194,3 +194,7 @@ backToTopBtn.on("click", function (e) {
   $("html, body").animate({ scrollTop: 0 }, "300");
 });
 
+
+particlesJS.load('particles-js', 'assets/particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
