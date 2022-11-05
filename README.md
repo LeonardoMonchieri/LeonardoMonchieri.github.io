@@ -1,11 +1,11 @@
-# Personal Portfolio
+## Personal Portfolio
 A web site for my personal portfolio, can be views at https://leonardomonchieri.github.io/ 
 
-# Built with 
+## Built with 
 
 - HTML
 - CSS
 - JavaScript
 
-# Credits
+## Credits
 The template of the site is taken from https://benrogers.dev/ with the permission of the author.
