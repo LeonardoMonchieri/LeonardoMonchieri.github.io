@@ -1,5 +1,5 @@
 ## Personal Portfolio
-A web site for my personal portfolio, can be views at https://leonardomonchieri.github.io/ 
+A web site of my personal portfolio, can be visited at https://leonardomonchieri.github.io/ 
 
 ## Built with 
 
