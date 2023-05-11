@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Lobs Theorem From Turing Machines - Stuff - Alecs Ferra</title>
+    <link rel="icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="./../style.css">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<body>
+    <h1>Explaining Löb's theorem using Turing machines</h1>
+
+    <h2>A weird Turing machine</h2>
+    <p>Consider a turing machine \(M\) that compute the following algorithm:</p>
+    <ol>
+        <li>Iterate over every every proof formalized in ZFC in lexicographic order.</li>
+        <li>if the proof is a proof that the turing machine \(M\) halt's then halt.</li>
+    </ol>
+    <p>The following construction is in fact possible, from Kleene's recursion theorem, Turing machines can compute functions based on their description.</p>
+    <p>Also it is important to note that the description of \(M\) really describes a family of Turing machines, but what I'm going to state holds for any of them.</p>
+
+    <h3>Is \(M\) going to halt?</h3>
+
+    <h4>Another weird Turing machine</h4>
+    <p>We can build another Turing machine \(N\) computing the following algorithm:</p>
+    <ol>
+        <li>Iterate over every every proof formalized in ZFC in lexicographic order.</li>
+        <li>if the proof is a proof that the turing machine \(N\) halt's then \(M\) halt's then halt.</li>
+    </ol>
+    <p>The same things stated for \(M\) also are true for \(N\).</p>
+
+    <h4>\(M\) is going to halt</h4>
+    <p>In ZFC we can construct a proof for the statement: \(halt(N) \rightarrow halt(M)\)</p>
+    <p>Proof:</p>
+    <p>From the fact that \(N\) halts we can deduce the fact that it found a proof for the statement \(halt(N) \rightarrow halt(M)\).</p>
+    <p>Given a proof for \(halt(N)\) halts we can deduce that \(halt(M)\) and indeed proving \(halt(N) \rightarrow halt(M)\). \(\blacksquare\)</p>
+    <p>Clearly \(N\) will find such proof and halt and by the same reasoning also \(M\) will halt.</p>
+
+    <h2>Löb's theorem</h2>
+    <p>Löb's theorem roughly states that if a statement \(P\) is provable then indeed it is also true, in modal logic we would write:</p>
+    $$\square (\square P \rightarrow P) \rightarrow \square P$$
+    <p>Where we read \(\square \phi\) as \(\phi\) is provable.</p>
+
+    <h3>Proving Löb's theorem</h3>
+    <ol>
+        <li>It exists \(\psi\) that satisfies \(\vdash \psi \leftrightarrow (\square \psi \rightarrow P)\).</li>
+        <li>\(\vdash \psi \rightarrow (\square \psi \rightarrow P)\), from 1.</li>
+        <li>\(\vdash \square(\psi \rightarrow (\square \psi \rightarrow P))\), from 2.</li>
+        <li>\(\vdash \square \psi \rightarrow \square (\square \psi \rightarrow P)\), from 3.</li>
+        <li>\(\vdash \square(\square \psi \rightarrow P) \rightarrow (\square\square\psi \rightarrow \square P)\).</li>
+        <li>\(\square \psi \rightarrow (\square \square \psi \rightarrow \square P)\), from 4 and 5.</li>
+        <li>\(\square \psi \rightarrow \square\square \psi\), from 6.</li>
+        <li>\(\square \psi \rightarrow \square P\), from 6 and 7.</li>
+        <li>Assume \(\vdash \square P \rightarrow P\).</li>
+        <li>\(\vdash \square \psi \rightarrow P\), from 8 and 9.</li>
+        <li>\(\vdash (\square \psi \rightarrow P) \rightarrow \psi\), from 1.</li>
+        <li>\(\psi\), from 10 and 11.</li>
+        <li>\(\vdash \square \psi\), from 12.</li>
+        <li>\(\vdash P\), from 13 and 10.</li>
+    </ol>
+
+    <h3>Reading it as a Turing machine</h3>
+    <p>By interpreting \(P\) as \(halt(M)\) we can read the construction of \(N\) as the definition of \(\psi\), in fact that step requires the "diagonal lemma" pretty much a dual of the Kleene's recursion lemma.</p>
+    <p>Our proof of the termination of \(M\) is indeed the dual of the Löb's theorem.</p>
+
+</body>
