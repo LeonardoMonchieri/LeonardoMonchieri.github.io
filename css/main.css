@@ -817,6 +817,11 @@ header .seperator-skew svg .fill-white {
   width: 100%;
 }
 
+.education .container .education-card .education-card-column .card-column-small-image img {
+  width: 50%;
+}
+
+
 .education .container .education-card .education-card-column .card-column-large {
   flex: 0 0 80%;
   padding-left: 1.5rem;
