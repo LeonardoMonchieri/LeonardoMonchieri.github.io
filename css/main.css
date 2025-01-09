@@ -818,10 +818,10 @@ header .seperator-skew svg .fill-white {
 }
 
 .education .container .education-card .education-card-column .card-column-small-image img {
-  display: flex; /* Enables Flexbox */
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-  width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
 }
 
 
