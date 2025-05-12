@@ -41,9 +41,12 @@
 </head>
 
 <body>
-  <div>
+  <header>
     <h1>Hi! I'm Alessio Ferrarini</h1>
+    <button id="theme-toggle"><img/></button>
+  </header>
 
+  <div>
     <p>
       I'm a first-year Computer Science Ph.D. student at
       <a href="https://software.imdea.org/">IMDEA Software</a>.
@@ -131,5 +134,33 @@
   <!--   </ul> -->
   <!-- </div> -->
 </body>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  function updateTheme(theme) {
+      localStorage.setItem("theme", theme);
+      toggle.querySelector("img").src = theme === "dark" ? "images/sun.png" : "images/moon.png";
+      toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      html.dataset.theme = theme;
+  }
+
+  function systemTheme() {
+      const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return dark ? "dark" : "light";
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+      const currentTheme = localStorage.getItem("theme") || systemTheme();
+      updateTheme(currentTheme);
+  });
+
+  toggle.addEventListener("click", () => {
+      const currentTheme = html.dataset.theme;
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      updateTheme(newTheme);
+  });
+</script>
 
 </html>
