@@ -142,6 +142,7 @@
   function updateTheme(theme) {
       localStorage.setItem("theme", theme);
       toggle.querySelector("img").src = theme === "dark" ? "images/sun.png" : "images/moon.png";
+      toggle.querySelector("img").alt = theme === "dark" ? "Light mode" : "Dark mode";
       toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
       html.dataset.theme = theme;
   }
