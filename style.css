@@ -436,24 +436,43 @@ label input {
 }
 
 /* Bg animation */
-html {
-  background-image: 
-    repeating-linear-gradient(-5deg, 
-      var(--background-color-alt) 0px, 
-      var(--background-color-alt) 1px, 
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200vw;
+  height: 200vh;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    repeating-linear-gradient(-5deg,
+      var(--background-color-alt) 0px,
+      var(--background-color-alt) 1px,
       rgba(0, 0, 0, 0) 1px,
       rgba(0, 0, 0, 0) 20px
     ),
-    repeating-linear-gradient(95deg, 
-      var(--background-color-alt) 0px, 
-      var(--background-color-alt) 1px, 
+    repeating-linear-gradient(95deg,
+      var(--background-color-alt) 0px,
+      var(--background-color-alt) 1px,
       rgba(0, 0, 0, 0) 1px,
       rgba(0, 0, 0, 0) 20px
-    );
-  animation: pulse 4s infinite alternate ease-in-out;
+);
+
+  will-change: filter, transform;
+  animation:
+    pulse-contrast 4s infinite ease-in-out,
+    hue-shift 6s infinite ease-in-out;
 }
 
-@keyframes pulse {
-  0% { filter: brightness(1); }
-  100% { filter: brightness(1.05); }
+@keyframes pulse-contrast {
+  0%   { filter: brightness(1) contrast(1); }
+  50%  { filter: brightness(1.2) contrast(1.4); }
+  100% { filter: brightness(1) contrast(1); }
+}
+
+@keyframes hue-shift {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(15deg); }
+  100% { filter: hue-rotate(0deg); }
 }
