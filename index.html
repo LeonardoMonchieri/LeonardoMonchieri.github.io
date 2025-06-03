@@ -58,9 +58,17 @@
       out. If you're in Padua or we’re at the same conference, I’m
       always up for a coffee. Just say hi!
     </p>
+    <script>
 
+      var me = "Leonardo.Monchieri";
+      var place = "unipd.it";
+
+      var elink = document.getElementById("mlink");
+
+      elink.href = `mailto:${me}@${place}`;
+    </script>
     <p>
-      The best way to get in touch with me is via email at Leonardo.Monchieri@unipd.it
+      The best way to get in touch with me is via <a id="mlink" href="#">email</a>.
     </p>
   </div>
 
